@@ -2,6 +2,8 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Tooppa/DataPersistanceAndAccess)
 
+[SQL Scripts for SuperheroesDb](SuperheroDB)
+
 [Database Diagram]()
 
 ## Table of Contents
