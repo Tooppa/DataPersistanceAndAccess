@@ -1,4 +1,4 @@
-﻿namespace DataPersistanceAndAccess
+﻿namespace CustomerDB 
 {
     public class Program
     {
