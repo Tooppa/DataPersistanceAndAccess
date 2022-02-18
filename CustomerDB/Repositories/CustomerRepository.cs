@@ -250,6 +250,7 @@ namespace CustomerDB.Repositories
             List<CustomerSpender> result = new List<CustomerSpender>();
             var sql = "SELECT SUM(Invoice.Total) AS Total, Customer.CustomerID FROM Customer" +
                 " LEFT JOIN Invoice ON Invoice.CustomerID = Customer.CustomerID" +
+                " WHERE Invoice.CustomerID IS NOT NULL" +
                 " GROUP BY Customer.CustomerID" +
                 " ORDER BY Total DESC;";
             try
