@@ -12,8 +12,9 @@ namespace CustomerDB
             //TestSelectByName(repository);
             //TestAllCustomers(repository);
             //TestAllCustomerWithOffsetAndLimit(repository);
-            //TestEditCustomer(repository);
             //TestInsert(repository);
+            //TestEditCustomer(repository);
+            //TestCustomersPerCountry(repository);
         }
 
         private static void TestEditCustomer(ICustomerRepository repository)
@@ -49,7 +50,7 @@ namespace CustomerDB
             foreach (Customer customer in customers)
                 Console.WriteLine(customer.ToString());
         }
-
+      
         static void TestInsert(ICustomerRepository repository)
         {
             Customer newCustomer = new Customer()
@@ -71,6 +72,13 @@ namespace CustomerDB
             }
             Customer customerFromDb = repository.GetByName("Bruce", "Wayne");
             Console.WriteLine(customerFromDb.ToString());
+        }
+      
+        static void TestCustomersPerCountry(ICustomerRepository repository)
+        {
+            IEnumerable<CustomerCountry> customersPerCountry = repository.GetNumberOfCustomersPerCountry();
+            foreach (CustomerCountry item in customersPerCountry)
+                Console.WriteLine(item.ToString());
         }
     }
 

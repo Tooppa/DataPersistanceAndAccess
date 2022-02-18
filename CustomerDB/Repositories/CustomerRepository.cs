@@ -244,5 +244,42 @@ namespace CustomerDB.Repositories
                 return reader.GetString(colIndex);
             return string.Empty;
         }
+
+        public IEnumerable<CustomerCountry> GetNumberOfCustomersPerCountry()
+        {
+
+            List<CustomerCountry> result = new List<CustomerCountry>();
+            var sql = "SELECT Country, COUNT(*) AS Customers FROM Customer" +
+                " GROUP BY Country" +
+                " ORDER BY Customers DESC;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result.Add(new CustomerCountry()
+                                {
+                                    Country = SafeGetString(reader, 0),
+                                    NumberOfCustomers = reader.GetInt32(1)
+                                });
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                // LOG
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
     }
 }
