@@ -15,6 +15,14 @@ namespace CustomerDB
             //TestInsert(repository);
             //TestEditCustomer(repository);
             //TestCustomersPerCountry(repository);
+            //TestCustomerSpending(repository);
+        }
+
+        private static void TestCustomerSpending(ICustomerRepository repository)
+        {
+            IEnumerable<CustomerSpender> customers = repository.GetCustomerSpending();
+            foreach (CustomerSpender customer in customers)
+                Console.WriteLine(customer.ToString());
         }
 
         private static void TestEditCustomer(ICustomerRepository repository)

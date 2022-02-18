@@ -244,6 +244,44 @@ namespace CustomerDB.Repositories
                 return reader.GetString(colIndex);
             return string.Empty;
         }
+        public IEnumerable<CustomerSpender> GetCustomerSpending()
+        {
+
+            List<CustomerSpender> result = new List<CustomerSpender>();
+            var sql = "SELECT SUM(Invoice.Total) AS Total, Customer.CustomerID FROM Customer" +
+                " LEFT JOIN Invoice ON Invoice.CustomerID = Customer.CustomerID" +
+                " GROUP BY Customer.CustomerID" +
+                " ORDER BY Total DESC;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result.Add(new CustomerSpender()
+                                {
+                                    Spending = reader.GetDecimal(0),
+                                    Customer = GetById(reader.GetInt32(1))
+
+                                });
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                // LOG
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
 
         public IEnumerable<CustomerCountry> GetNumberOfCustomersPerCountry()
         {
