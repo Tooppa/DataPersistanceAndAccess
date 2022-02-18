@@ -8,6 +8,7 @@ namespace CustomerDB.Repositories
         public Customer GetByName(string FirstName, string LastName);
         public IEnumerable<Customer> GetPage(int limit, int offset);
         public IEnumerable<CustomerCountry> GetNumberOfCustomersPerCountry();
+        public IEnumerable<CustomerSpender> GetCustomerSpending();
         public string SafeGetString(SqlDataReader reader, int colIndex);
     }
 }
