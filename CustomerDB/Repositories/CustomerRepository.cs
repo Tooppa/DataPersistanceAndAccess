@@ -182,9 +182,37 @@ namespace CustomerDB.Repositories
         }
 
         public bool Update(Customer entity)
-        {
-            throw new NotImplementedException();
+        {       
+            bool result = false;
+            string sql = "UPDATE Customer SET CustomerID = @CustomerID, FirstName = @FirstName," + 
+                " LastName = @LastName, Country = @Country, PostalCode = @PostalCode, Phone = @Phone, Email = @Email";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerID", entity.CustomerId);
+                        cmd.Parameters.AddWithValue("@FirstName", entity.FirstName);
+                        cmd.Parameters.AddWithValue("@LastName", entity.LastName);
+                        cmd.Parameters.AddWithValue("@Country", entity.Country);
+                        cmd.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
+                        cmd.Parameters.AddWithValue("@Phone", entity.Phone);
+                        cmd.Parameters.AddWithValue("@Email", entity.Email);
+                        result = cmd.ExecuteNonQuery() > 0;                    }
+                    conn.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                // LOG
+                Console.WriteLine(ex.Message);
+            }
+            return result;
         }
+
         public string SafeGetString(SqlDataReader reader, int colIndex)
         {
             if (!reader.IsDBNull(colIndex))

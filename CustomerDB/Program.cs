@@ -12,6 +12,17 @@ namespace CustomerDB
             //TestSelectByName(repository);
             //TestAllCustomers(repository);
             //TestAllCustomerWithOffsetAndLimit(repository);
+            //TestEditCustomer(repository);
+        }
+
+        private static void TestEditCustomer(ICustomerRepository repository)
+        {
+            Customer customer = repository.GetById(3);
+            Console.WriteLine(customer.ToString());
+            customer.FirstName = "Edited";
+            repository.Update(customer);
+            customer = repository.GetById(3);
+            Console.WriteLine(customer.ToString());
         }
 
         static void TestSelectById(ICustomerRepository repository)
