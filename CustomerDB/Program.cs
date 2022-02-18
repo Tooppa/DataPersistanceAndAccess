@@ -13,6 +13,7 @@ namespace CustomerDB
             //TestAllCustomers(repository);
             //TestAllCustomerWithOffsetAndLimit(repository);
             //TestEditCustomer(repository);
+            //TestInsert(repository);
         }
 
         private static void TestEditCustomer(ICustomerRepository repository)

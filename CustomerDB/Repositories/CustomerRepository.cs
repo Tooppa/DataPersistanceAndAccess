@@ -209,8 +209,8 @@ namespace CustomerDB.Repositories
         public bool Update(Customer entity)
         {       
             bool result = false;
-            string sql = "UPDATE Customer SET CustomerID = @CustomerID, FirstName = @FirstName," + 
-                " LastName = @LastName, Country = @Country, PostalCode = @PostalCode, Phone = @Phone, Email = @Email";
+            string sql = "UPDATE Customer SET FirstName = @FirstName," + 
+                " LastName = @LastName, Country = @Country, PostalCode = @PostalCode, Phone = @Phone, Email = @Email WHERE CustomerID = @CustomerID";
 
             try
             {
