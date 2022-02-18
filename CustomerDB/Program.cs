@@ -10,6 +10,8 @@ namespace CustomerDB
             ICustomerRepository repository = new CustomerRepository();
             //TestSelectById(repository);
             //TestSelectByName(repository);
+            //TestAllCustomers(repository);
+            //TestAllCustomerWithOffsetAndLimit(repository);
         }
 
         static void TestSelectById(ICustomerRepository repository)
@@ -22,6 +24,21 @@ namespace CustomerDB
         {
             Customer customer = repository.GetByName("Jack", "Smith");
             Console.WriteLine(customer.ToString());
+            CustomerRepository repo = new CustomerRepository();
+            repo.GetAll();
+        }
+        static void TestAllCustomers(ICustomerRepository repository) 
+        {
+            IEnumerable<Customer> customers = repository.GetAll();
+            foreach (Customer customer in customers)
+                Console.WriteLine(customer.ToString());
+        }
+        static void TestAllCustomerWithOffsetAndLimit(ICustomerRepository repository)
+        {
+            IEnumerable<Customer> customers = repository.GetPage(10, 5);
+            foreach (Customer customer in customers)
+                Console.WriteLine(customer.ToString());
         }
     }
+
 }
