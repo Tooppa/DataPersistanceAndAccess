@@ -12,6 +12,7 @@ namespace CustomerDB
             //TestSelectByName(repository);
             //TestAllCustomers(repository);
             //TestAllCustomerWithOffsetAndLimit(repository);
+            //TestInsert(repository);
         }
 
         static void TestSelectById(ICustomerRepository repository)
@@ -24,8 +25,6 @@ namespace CustomerDB
         {
             Customer customer = repository.GetByName("Jack", "Smith");
             Console.WriteLine(customer.ToString());
-            CustomerRepository repo = new CustomerRepository();
-            repo.GetAll();
         }
         static void TestAllCustomers(ICustomerRepository repository) 
         {
@@ -38,6 +37,29 @@ namespace CustomerDB
             IEnumerable<Customer> customers = repository.GetPage(10, 5);
             foreach (Customer customer in customers)
                 Console.WriteLine(customer.ToString());
+        }
+
+        static void TestInsert(ICustomerRepository repository)
+        {
+            Customer newCustomer = new Customer()
+            {
+                FirstName = "Bruce",
+                LastName = "Wayne",
+                Country = "USA",
+                PostalCode = "53540",
+                Phone = "1800-BATMAN",
+                Email = "bruce.wayne@waynecorp.com"
+            };
+
+            if (repository.Create(newCustomer))
+            {
+                Console.WriteLine("Insert successful.");
+            } else
+            {
+                Console.WriteLine("Insert unsuccessful");
+            }
+            Customer customerFromDb = repository.GetByName("Bruce", "Wayne");
+            Console.WriteLine(customerFromDb.ToString());
         }
     }
 
