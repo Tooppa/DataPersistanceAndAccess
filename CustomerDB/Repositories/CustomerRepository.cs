@@ -7,7 +7,32 @@ namespace CustomerDB.Repositories
     {
         public bool Create(Customer entity)
         {
-            throw new NotImplementedException();
+            bool success = false;
+            string sql = "INSERT INTO Customer (FirstName, LastName, Country, PostalCode, Phone, Email)" +
+                " VALUES (@FirstName, @LastName, @Country, @PostalCode, @Phone, @Email)";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@FirstName", entity.FirstName);
+                        cmd.Parameters.AddWithValue("@LastName", entity.LastName);
+                        cmd.Parameters.AddWithValue("@Country", entity.Country);
+                        cmd.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
+                        cmd.Parameters.AddWithValue("@Phone", entity.Phone);
+                        cmd.Parameters.AddWithValue("@Email", entity.Email);
+                        success = cmd.ExecuteNonQuery() > 0 ? true : false;
+                    }
+                    conn.Close();
+                }
+            } catch (SqlException ex)
+            {
+                // LOG
+                Console.WriteLine(ex.Message);
+            }
+            return success;
         }
 
         public bool Delete(Customer entity)
