@@ -12,7 +12,19 @@ namespace CustomerDB
             //TestSelectByName(repository);
             //TestAllCustomers(repository);
             //TestAllCustomerWithOffsetAndLimit(repository);
+            //TestInsert(repository);
+            //TestEditCustomer(repository);
             //TestCustomersPerCountry(repository);
+        }
+
+        private static void TestEditCustomer(ICustomerRepository repository)
+        {
+            Customer customer = repository.GetById(3);
+            Console.WriteLine(customer.ToString());
+            customer.FirstName = "Edited";
+            repository.Update(customer);
+            customer = repository.GetById(3);
+            Console.WriteLine(customer.ToString());
         }
 
         static void TestSelectById(ICustomerRepository repository)
@@ -25,8 +37,6 @@ namespace CustomerDB
         {
             Customer customer = repository.GetByName("Jack", "Smith");
             Console.WriteLine(customer.ToString());
-            CustomerRepository repo = new CustomerRepository();
-            repo.GetAll();
         }
         static void TestAllCustomers(ICustomerRepository repository) 
         {
@@ -40,7 +50,30 @@ namespace CustomerDB
             foreach (Customer customer in customers)
                 Console.WriteLine(customer.ToString());
         }
+      
+        static void TestInsert(ICustomerRepository repository)
+        {
+            Customer newCustomer = new Customer()
+            {
+                FirstName = "Bruce",
+                LastName = "Wayne",
+                Country = "USA",
+                PostalCode = "53540",
+                Phone = "1800-BATMAN",
+                Email = "bruce.wayne@waynecorp.com"
+            };
 
+            if (repository.Create(newCustomer))
+            {
+                Console.WriteLine("Insert successful.");
+            } else
+            {
+                Console.WriteLine("Insert unsuccessful");
+            }
+            Customer customerFromDb = repository.GetByName("Bruce", "Wayne");
+            Console.WriteLine(customerFromDb.ToString());
+        }
+      
         static void TestCustomersPerCountry(ICustomerRepository repository)
         {
             IEnumerable<CustomerCountry> customersPerCountry = repository.GetNumberOfCustomersPerCountry();
