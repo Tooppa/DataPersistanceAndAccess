@@ -9,11 +9,18 @@ namespace CustomerDB
         {
             ICustomerRepository repository = new CustomerRepository();
             //TestSelectById(repository);
+            //TestSelectByName(repository);
         }
 
         static void TestSelectById(ICustomerRepository repository)
         {
-            Customer customer = repository.GetById(1);
+            Customer customer = repository.GetById(34);
+            Console.WriteLine(customer.ToString());
+        }
+
+        static void TestSelectByName(ICustomerRepository repository)
+        {
+            Customer customer = repository.GetByName("Jack", "Smith");
             Console.WriteLine(customer.ToString());
         }
     }
