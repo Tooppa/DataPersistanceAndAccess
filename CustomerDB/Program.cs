@@ -1,8 +1,6 @@
 ﻿using CustomerDB.Models;
 using CustomerDB.Repositories;
 
-using CustomerDB.Repositories;
-
 namespace CustomerDB 
 {
     public class Program

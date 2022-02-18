@@ -70,20 +70,24 @@ namespace CustomerDB.Repositories
                         {
                             while (reader.Read())
                             {
-                                customer.CustomerId = reader.GetInt32(0);
-                                customer.FirstName = reader.GetString(1);
-                                customer.LastName = reader.GetString(2);
-                                customer.Country = reader.GetString(3);
-                                customer.PostalCode = reader.GetString(4);
-                                customer.Phone = reader.GetString(5);
-                                customer.Email = reader.GetString(6);
+                                customer = new Customer()
+                                {
+                                    CustomerId = reader.GetInt32(0),
+                                    FirstName = SafeGetString(reader, 1),
+                                    LastName = SafeGetString(reader, 2),
+                                    Country = SafeGetString(reader, 3),
+                                    PostalCode = SafeGetString(reader, 4),
+                                    Phone = SafeGetString(reader, 5),
+                                    Email = SafeGetString(reader, 6),
+                                };
                             }
                         }
                     }
                     conn.Close();
                 }
 
-            } catch (SqlException ex)
+            }
+            catch (SqlException ex)
             {
                 // LOG
                 Console.WriteLine(ex.Message);
@@ -110,13 +114,16 @@ namespace CustomerDB.Repositories
                         {
                             while (reader.Read())
                             {
-                                customer.CustomerId = reader.GetInt32(0);
-                                customer.FirstName = reader.GetString(1);
-                                customer.LastName = reader.GetString(2);
-                                customer.Country = reader.GetString(3);
-                                customer.PostalCode = reader.GetString(4);
-                                customer.Phone = reader.GetString(5);
-                                customer.Email = reader.GetString(6);
+                                customer = new Customer()
+                                {
+                                    CustomerId = reader.GetInt32(0),
+                                    FirstName = SafeGetString(reader, 1),
+                                    LastName = SafeGetString(reader, 2),
+                                    Country = SafeGetString(reader, 3),
+                                    PostalCode = SafeGetString(reader, 4),
+                                    Phone = SafeGetString(reader, 5),
+                                    Email = SafeGetString(reader, 6),
+                                };
                             }
                         }
                     }
