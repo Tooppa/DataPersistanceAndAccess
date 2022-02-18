@@ -7,9 +7,12 @@ namespace CustomerDB.Repositories
         public static string GetConnectionString()
         {
             SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            sqlConnectionStringBuilder.DataSource = ""; //datasource is difrent for diffrent user. dont upload the string to github
+            // search local machine for SQL Express instance
+            sqlConnectionStringBuilder.DataSource = ".\\SQLEXPRESS";
             sqlConnectionStringBuilder.InitialCatalog = "Chinook";
             sqlConnectionStringBuilder.IntegratedSecurity = true;
+            // otherwise connection fails due to untrusted SSL certificate chain
+            sqlConnectionStringBuilder.TrustServerCertificate = true;
             return sqlConnectionStringBuilder.ConnectionString;
         }
     }
