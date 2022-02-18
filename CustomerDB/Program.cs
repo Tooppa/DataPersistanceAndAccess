@@ -12,6 +12,7 @@ namespace CustomerDB
             //TestSelectByName(repository);
             //TestAllCustomers(repository);
             //TestAllCustomerWithOffsetAndLimit(repository);
+            //TestCustomersPerCountry(repository);
         }
 
         static void TestSelectById(ICustomerRepository repository)
@@ -38,6 +39,13 @@ namespace CustomerDB
             IEnumerable<Customer> customers = repository.GetPage(10, 5);
             foreach (Customer customer in customers)
                 Console.WriteLine(customer.ToString());
+        }
+
+        static void TestCustomersPerCountry(ICustomerRepository repository)
+        {
+            IEnumerable<CustomerCountry> customersPerCountry = repository.GetNumberOfCustomersPerCountry();
+            foreach (CustomerCountry item in customersPerCountry)
+                Console.WriteLine(item.ToString());
         }
     }
 
