@@ -54,7 +54,82 @@ namespace CustomerDB.Repositories
 
         public Customer GetById(int id)
         {
-            throw new NotImplementedException();
+            Customer customer = new Customer();
+            string sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer" +
+                " WHERE CustomerId = @CustomerId;";
+
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerId", id);
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                customer.CustomerId = reader.GetInt32(0);
+                                customer.FirstName = reader.GetString(1);
+                                customer.LastName = reader.GetString(2);
+                                customer.Country = reader.GetString(3);
+                                customer.PostalCode = reader.GetString(4);
+                                customer.Phone = reader.GetString(5);
+                                customer.Email = reader.GetString(6);
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+
+            } catch (SqlException ex)
+            {
+                // LOG
+                Console.WriteLine(ex.Message);
+            }
+            return customer;
+        }
+
+        public Customer GetByName(string FirstName, string LastName)
+        {
+            Customer customer = new Customer();
+            string sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer" +
+                " WHERE FirstName LIKE '%' + @FirstName + '%' AND LastName LIKE '%' + @LastName + '%';";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@FirstName", FirstName);
+                        cmd.Parameters.AddWithValue("@LastName", LastName);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                customer.CustomerId = reader.GetInt32(0);
+                                customer.FirstName = reader.GetString(1);
+                                customer.LastName = reader.GetString(2);
+                                customer.Country = reader.GetString(3);
+                                customer.PostalCode = reader.GetString(4);
+                                customer.Phone = reader.GetString(5);
+                                customer.Email = reader.GetString(6);
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                // LOG
+                Console.WriteLine(ex.Message);
+            }
+            return customer;
         }
 
         public List<Customer> GetPage(int limit, int offset)
