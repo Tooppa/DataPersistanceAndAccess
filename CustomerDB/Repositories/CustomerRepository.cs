@@ -324,14 +324,14 @@ namespace CustomerDB.Repositories
         public IEnumerable<CustomerGenre> GetCustomerGenre(int id)
         {
             List<CustomerGenre> result = new List<CustomerGenre>();
-            var sql = "SELECT TOP 1 WITH TIES Genre.Name AS Genre, COUNT(Genre.Name) AS Tracks FROM Customer" +
-            "LEFT JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId" +
-            "LEFT JOIN InvoiceLine ON Invoice.InvoiceId = InvoiceLine.InvoiceId" +
-            "LEFT JOIN Track ON InvoiceLine.TrackId = Track.TrackId" +
-            "LEFT JOIN Genre ON Track.GenreId = Genre.GenreId" +
-            "WHERE Customer.CustomerId = @CustomerId" +
-            "AND Invoice.CustomerId IS NOT NULL" +
-            "GROUP BY Genre.Name" +
+            var sql = "SELECT TOP 1 WITH TIES Genre.Name AS Genre, COUNT(Genre.Name) AS Tracks FROM Customer " +
+            "LEFT JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId " +
+            "LEFT JOIN InvoiceLine ON Invoice.InvoiceId = InvoiceLine.InvoiceId " +
+            "LEFT JOIN Track ON InvoiceLine.TrackId = Track.TrackId " +
+            "LEFT JOIN Genre ON Track.GenreId = Genre.GenreId " +
+            "WHERE Customer.CustomerId = @CustomerId " +
+            "AND Invoice.CustomerId IS NOT NULL " +
+            "GROUP BY Genre.Name " +
             "ORDER BY Tracks DESC;";
             try
             {
