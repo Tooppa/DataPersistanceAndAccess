@@ -36,6 +36,8 @@ The [CustomerDB](CustomerDB) on the other hand is a C# console application that 
 * Display the names of the customers along with their total amounts of money spent, ordered from highest to lowest
 * Display the most popular genre and the amount of tracks for that genre for a given customer id. The most popular just means the genre for which the user has bought the most tracks for. In case of a tie between genres, all of them are displayed.
 
+The Main method of the Program.cs file contains test methods for all the aforementioned use cases. You can comment/uncomment them line by line to test each feature or even modify the test methods themselves to try out different inputs.
+
 ## Technologies
 
 - C#
