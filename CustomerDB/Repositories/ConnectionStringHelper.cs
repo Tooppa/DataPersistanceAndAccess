@@ -4,6 +4,12 @@ namespace CustomerDB.Repositories
 {
     public class ConnectionStringHelper
     {
+        /// <summary>
+        /// Gets the string required for the connection to the database
+        /// </summary>
+        /// <returns>
+        /// String from SqlConnectionStringBuilder with right information
+        /// </returns>
         public static string GetConnectionString()
         {
             SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
