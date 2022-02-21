@@ -4,7 +4,7 @@
 
 [SQL Scripts for SuperheroesDb](SuperheroDB)
 
-[Database Diagram]()
+[Database Diagram of SuperheroesDb](Documentation/SuperheroDb_Diagram.png)
 
 ## Table of Contents
 
