@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace CustomerDB.Models
+﻿namespace CustomerDB.Models
 {
-    public class CustomerCountry
+    public class CustomerGenre
     {
-        public string? Country { get; set; }
-        public int NumberOfCustomers { get; set; }
+        public string? Genre { get; set; }
+        public int Number { get; set; }
 
         /// <summary>
         /// Converts the database element to string
@@ -15,7 +13,7 @@ namespace CustomerDB.Models
         /// </returns>
         public override string? ToString()
         {
-            return Country + ": " + NumberOfCustomers;
+            return "Genre: " + Genre + ", Amount: " + Number;
         }
     }
 }

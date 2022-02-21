@@ -10,6 +10,12 @@
         public string? Phone { get; set; }
         public string? Email { get; set; }
 
+        /// <summary>
+        /// Converts the database element to string
+        /// </summary>
+        /// <returns>
+        /// String containing infromation from the element
+        /// </returns>
         public override string? ToString()
         {
             return this.CustomerId + " - " + this.FirstName + " " + this.LastName + " - " + this.Country;
