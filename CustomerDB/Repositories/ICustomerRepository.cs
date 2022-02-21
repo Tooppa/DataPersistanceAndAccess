@@ -9,6 +9,7 @@ namespace CustomerDB.Repositories
         public IEnumerable<Customer> GetPage(int limit, int offset);
         public IEnumerable<CustomerCountry> GetNumberOfCustomersPerCountry();
         public IEnumerable<CustomerSpender> GetCustomerSpending();
+        public IEnumerable<CustomerGenre> GetCustomerGenre(int id);
         public string SafeGetString(SqlDataReader reader, int colIndex);
     }
 }
