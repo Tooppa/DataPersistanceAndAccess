@@ -16,6 +16,13 @@ namespace CustomerDB
             //TestEditCustomer(repository);
             //TestCustomersPerCountry(repository);
             //TestCustomerSpending(repository);
+            //TestCustomerGenre(repository);
+        }
+        private static void TestCustomerGenre(ICustomerRepository repository)
+        {
+            IEnumerable<CustomerGenre> genres = repository.GetCustomerGenre(12);
+            foreach (CustomerGenre genre in genres)
+                Console.WriteLine(genre.ToString());
         }
 
         private static void TestCustomerSpending(ICustomerRepository repository)
