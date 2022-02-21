@@ -12,7 +12,7 @@
 
         public override string? ToString()
         {
-            return this.CustomerId + " - " + this.FirstName + " " + this.LastName + " - " + this.Country;
+            return CustomerId + " - " + FirstName + " " + LastName + " - " + Country + " - " + PostalCode + " - " + Phone + " - " + Email;
         }
     }
 }
