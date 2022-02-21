@@ -16,7 +16,7 @@ namespace CustomerDB
             //TestEditCustomer(repository);
             //TestCustomersPerCountry(repository);
             //TestCustomerSpending(repository);
-            TestCustomerGenre(repository);
+            //TestCustomerGenre(repository);
         }
         private static void TestCustomerGenre(ICustomerRepository repository)
         {
