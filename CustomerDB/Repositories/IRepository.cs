@@ -5,35 +5,34 @@ namespace CustomerDB.Repositories
     public  interface IRepository<T>
     {
         /// <summary>
-        /// Gets an element from the repository
+        /// Gets an element from the database
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="id">The id of the element</param>
         /// <returns>
-        /// returns the elements
+        /// Returns the element with the given id if found
         /// </returns>
         T GetById(int id);
         /// <summary>
-        /// Gets all the elements from the repository
+        /// Gets all the elements from the database
         /// </summary>
-        /// <param name="entity"></param>
         /// <returns>
-        /// returns a list of the elements
+        /// Returns a list of all the elements
         /// </returns>
         IEnumerable<T> GetAll();
         /// <summary>
         /// Creates a new element to the database
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">The new element to be added</param>
         /// <returns>
-        /// Return true if succesfull
+        /// Return true if successful
         /// </returns>
         bool Create(T entity);
         /// <summary>
         /// Updates a existing element in the database
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">The element to be updated</param>
         /// <returns>
-        /// Return true if succesfull
+        /// Return true if successful
         /// </returns>
         bool Update(T entity);
         /// <summary>

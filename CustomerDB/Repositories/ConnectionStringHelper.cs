@@ -13,7 +13,7 @@ namespace CustomerDB.Repositories
         public static string GetConnectionString()
         {
             SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            // search local machine for SQL Express instance
+            // search local machine for SQL Express Server instance
             sqlConnectionStringBuilder.DataSource = ".\\SQLEXPRESS";
             sqlConnectionStringBuilder.InitialCatalog = "Chinook";
             sqlConnectionStringBuilder.IntegratedSecurity = true;

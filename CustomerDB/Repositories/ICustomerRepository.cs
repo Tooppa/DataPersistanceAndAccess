@@ -8,12 +8,12 @@ namespace CustomerDB.Repositories
         /// <summary>
         /// Gets the Customer by name from the database
         /// </summary>
-        /// <param name="FirstName"></param>
-        /// <param name="LastName"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
         /// <returns>
         /// Customer element with the right info
         /// </returns>
-        public Customer GetByName(string FirstName, string LastName);
+        public Customer GetByName(string firstName, string lastName);
         /// <summary>
         /// Gets a page from the database
         /// </summary>
@@ -48,8 +48,8 @@ namespace CustomerDB.Repositories
         /// <summary>
         /// Gets the string from the database safely
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="colIndex"></param>
+        /// <param name="reader">SQLDataReader object</param>
+        /// <param name="colIndex">Index of the database column to be read next</param>
         /// <returns>
         /// String from the database. If the database has a null value returns an empty string
         /// </returns>

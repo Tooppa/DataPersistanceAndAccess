@@ -8,28 +8,34 @@ namespace CustomerDB.Repositories
         public bool Create(Customer entity)
         {
             bool success = false;
+            // sql statement
             string sql = "INSERT INTO Customer (FirstName, LastName, Country, PostalCode, Phone, Email)" +
                 " VALUES (@FirstName, @LastName, @Country, @PostalCode, @Phone, @Email)";
             try
             {
+                // get connection string
                 using (SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
                 {
+                    // open connection to database
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
+                        // safely add values to prevent sql injections
                         cmd.Parameters.AddWithValue("@FirstName", entity.FirstName);
                         cmd.Parameters.AddWithValue("@LastName", entity.LastName);
                         cmd.Parameters.AddWithValue("@Country", entity.Country);
                         cmd.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
                         cmd.Parameters.AddWithValue("@Phone", entity.Phone);
                         cmd.Parameters.AddWithValue("@Email", entity.Email);
+                        // execute statament
                         success = cmd.ExecuteNonQuery() > 0 ? true : false;
                     }
+                    // close the connection
                     conn.Close();
                 }
             } catch (SqlException ex)
             {
-                // LOG
+                // print any exceptions to console
                 Console.WriteLine(ex.Message);
             }
             return success;
@@ -168,7 +174,7 @@ namespace CustomerDB.Repositories
         public IEnumerable<Customer> GetPage(int limit, int offset)
         {
             List<Customer> result = new List<Customer>();
-            var sql = "SELECT CustomerID, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer ORDER BY CustomerId OFFSET @Limit ROWS FETCH NEXT @Offset ROWS ONLY;";
+            var sql = "SELECT CustomerID, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer ORDER BY CustomerId OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY;";
             try
             {
                 using(SqlConnection conn = new SqlConnection(ConnectionStringHelper.GetConnectionString()))
